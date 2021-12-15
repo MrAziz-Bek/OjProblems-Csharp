@@ -257,31 +257,24 @@ public class Solutions
     }
     public void Problem56()
     {
-        string myStr = Console.ReadLine();
-        char temp;
-        char[] charstr = myStr.ToCharArray();
-        int something = 0;
-        for (int i = 0; i < myStr.Length; i++)
+        var str = Console.ReadLine().ToCharArray();
+        for (int i = 0; i < str.Length; i++)
         {
-            if (charstr[i] == ' ')
+            for (int j = i + 1; j < str.Length; j++)
             {
-                something = i;
-            }
-        }
-        myStr.Remove(0, 1);
-        for (int i = 1; i < charstr.Length; i++)
-        {
-            for (int j = 0; j < charstr.Length - 1; j++)
-            {
-                if (charstr[j] > charstr[j + 1])
+                if (str[j] == ' ')
                 {
-                    temp = charstr[j];
-                    charstr[j] = charstr[j + 1];
-                    charstr[j + 1] = temp;
+                    continue;
+                }
+                if (str[i] > str[j])
+                {
+                    char temp = str[i];
+                    str[i] = str[j];
+                    str[j] = temp;
                 }
             }
         }
-        Console.Write(charstr);
+        System.Console.WriteLine($"{new String(str)}");
     }
     private bool Palindrom(int n)
     {
@@ -319,7 +312,12 @@ public class Solutions
     }
     public void Problem54()
     {
-        // code-block...
+        var nums = Console.ReadLine().ToCharArray().Select(i => i.ToString()).ToList();
+        var counts = nums.GroupBy(i => i).Select(i => new { Num = i.ToList()[0], Count = i.Count() }).ToList();
+        foreach (var n in nums)
+        {
+            System.Console.Write($"{counts.Where(i => i.Num == n).ToList()[0].Count}");
+        }
     }
     private int getNewN(int n)
     {
