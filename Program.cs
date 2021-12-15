@@ -1,2 +1,2 @@
 ﻿Solutions obj = new Solutions();
-obj.Problem56();
+obj.Problem70();

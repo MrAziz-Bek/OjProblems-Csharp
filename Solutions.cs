@@ -1,9 +1,176 @@
+using System.Diagnostics;
 namespace OjProblems;
 
 public class Solutions
 {
+    public int add(int x, int y)
+    {
+        return x + y;
+    }
+    public void Problem70()
+    {
+        int n = int.Parse(Console.ReadLine()), sum = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            sum = add(i, sum);
+        }
+        System.Console.WriteLine(sum);
+    }
+    public void Problem69()
+    {
+        int n = int.Parse(Console.ReadLine()), sum = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            sum += numbers[i];
+        }
+        System.Console.WriteLine(sum);
+    }
+    public void Problem68()
+    {
+        int n = int.Parse(Console.ReadLine());
+        string str = Console.ReadLine();
+        char[] ch = str.ToCharArray();
+
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0, count = n - i; j < n; j++)
+            {
+                System.Console.Write($"{ch[count++ % 5]}");
+            }
+            System.Console.WriteLine();
+        }
+    }
+    public void Problem67()
+    {
+        int n = int.Parse(Console.ReadLine());
+
+        var x = n switch
+        {
+            1 => "January",
+            2 => "February",
+            3 => "March",
+            4 => "April",
+            5 => "May",
+            6 => "June",
+            7 => "July",
+            8 => "August",
+            9 => "September",
+            10 => "October",
+            11 => "November",
+            12 => "December",
+            _ => "none"
+        };
+        System.Console.WriteLine(x);
+    }
+    public void Problem66()
+    {
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = 1; j <= i; j++)
+            {
+                System.Console.Write($"*");
+            }
+            System.Console.WriteLine();
+        }
+    }
+    public void Problem65()
+    {
+        double n = double.Parse(Console.ReadLine());
+
+        if (n * 10000 > 100000)
+        {
+            System.Console.WriteLine($"{(n * 8900):F2}");
+        }
+        else
+        {
+            System.Console.WriteLine($"{(n * 10000):F2}");
+        }
+    }
+    public void Problem64()
+    {
+        char[] unli = new char[10] { 'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U' };
+        char ch = char.Parse(Console.ReadLine());
+        foreach (var c in unli)
+        {
+            if (ch == c)
+            {
+                System.Console.WriteLine($"unli");
+                break;
+            }
+            else
+            {
+                System.Console.WriteLine("undosh");
+                break;
+            }
+        }
+    }
+    public void Problem63()
+    {
+        int n = int.Parse(Console.ReadLine()), count = 0;
+        while (true)
+        {
+            count++;
+            n /= 10;
+            if (n <= 0)
+            {
+                break;
+            }
+        }
+        System.Console.WriteLine(count);
+    }
+    public int daraja(int n)
+    {
+        int count = 0;
+        while (n != 0)
+        {
+            n /= 10;
+            count++;
+        }
+        return count;
+    }
+    public bool ArmN(int n)
+    {
+        int sum = 0, orgN = n;
+        while (orgN != 0)
+        {
+            sum += (int)Math.Pow(orgN % 10, daraja(n));
+            orgN /= 10;
+        }
+        if (sum == n)
+        {
+            return true;
+        }
+        return false;
+    }
+    public void Problem62()
+    {
+        int n = int.Parse(Console.ReadLine());
+        for (int i = 1; i <= n; i++)
+        {
+            if (ArmN(i))
+            {
+                Console.Write($"{i} ");
+            }
+        }
+        Console.WriteLine();
+    }
     public void Problem61()
     {
+        int n = int.Parse(Console.ReadLine());
+        string str = Console.ReadLine();
+        char[] chArr = str.ToCharArray();
+        int count = 0;
+        for (int i = 0; i < str.Length; i++)
+        {
+            if (chArr[i] == 'c' && chArr[i + 1] == 'a' && chArr[i + 2] == 't')
+            {
+                count++;
+            }
+        }
+        System.Console.WriteLine(count);
 
     }
     public void Problem60()
