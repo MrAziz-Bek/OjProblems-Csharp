@@ -1,8 +1,224 @@
+using System.ComponentModel.DataAnnotations;
 namespace OjProblems;
 
-public static class Solutions
+public class Solutions
 {
-    public static void Problem50()
+    public void Problem61()
+    {
+
+    }
+    public void Problem60()
+    {
+        var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+        int max1, max2 = 0;
+        max1 = numbers[0] > numbers[1] ? numbers[0] : numbers[1];
+        max2 = numbers[0] < numbers[1] ? numbers[0] : numbers[1];
+
+        foreach (var num in numbers)
+        {
+            max2 = num > max2 ? num : max2;
+            max2 = num > max1 ? max1 : max2;
+            max1 = num > max1 ? num : max1;
+        }
+        System.Console.WriteLine($"{max1} {max2}");
+    }
+    private void printStars(int num, int count)
+    {
+        System.Console.Write($"{num}: ");
+        while (count-- > 0)
+        {
+            System.Console.Write("*");
+        }
+        System.Console.WriteLine();
+    }
+    public void Problem59()
+    {
+        var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+        int ones = 0, twos = 0, threes = 0;
+        foreach (var num in numbers)
+        {
+            switch (num)
+            {
+                case 1:
+                    ones++; break;
+                case 2:
+                    twos++; break;
+                case 3:
+                    threes++; break;
+                default: break;
+            }
+        }
+        printStars(1, ones);
+        printStars(2, twos);
+        printStars(3, threes);
+    }
+    public void Problem58()
+    {
+        var t = int.Parse(Console.ReadLine());
+        var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+        for (int i = 0; i < numbers.Length - 1; i++)
+        {
+            if (numbers[i] >= numbers[i + 1])
+            {
+                int temp = numbers[i];
+                numbers[i] = numbers[i + 1];
+                numbers[i + 1] = temp;
+            }
+        }
+        foreach (var num in numbers)
+        {
+            System.Console.WriteLine($"{num}");
+        }
+    }
+    public void Problem57()
+    {
+        int t = int.Parse(Console.ReadLine());
+        var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+        double aver = 0;
+        foreach (var num in numbers)
+        {
+            aver += num;
+        }
+        aver /= numbers.Count();
+        foreach (var num in numbers)
+        {
+            if (num >= aver)
+            {
+                System.Console.Write($"{num} ");
+            }
+        }
+        System.Console.WriteLine();
+    }
+    public void Problem56()
+    {
+        string myStr = Console.ReadLine();
+        char temp;
+        char[] charstr = myStr.ToCharArray();
+        int something = 0;
+        for (int i = 0; i < myStr.Length; i++)
+        {
+            if (charstr[i] == ' ')
+            {
+                something = i;
+            }
+        }
+        myStr.Remove(0, 1);
+        for (int i = 1; i < charstr.Length; i++)
+        {
+            for (int j = 0; j < charstr.Length - 1; j++)
+            {
+                if (charstr[j] > charstr[j + 1])
+                {
+                    temp = charstr[j];
+                    charstr[j] = charstr[j + 1];
+                    charstr[j + 1] = temp;
+                }
+            }
+        }
+        Console.Write(charstr);
+    }
+    private bool Palindrom(int n)
+    {
+        int rev = 0, orgN = n;
+        while (n != 0)
+        {
+            rev = rev * 10 + n % 10;
+            n /= 10;
+        }
+        if (rev == orgN)
+        {
+            return true;
+        }
+        return false;
+    }
+    private int reverseDigits(int n)
+    {
+        int rev = 0;
+        while (n != 0)
+        {
+            rev = rev * 10 + n % 10;
+            n /= 10;
+        }
+        return rev;
+    }
+    public void Problem55()
+    {
+        int n = int.Parse(Console.ReadLine()), count = 0;
+        while (Palindrom(n) == false)
+        {
+            n = n + reverseDigits(n);
+            count++;
+        }
+        System.Console.WriteLine($"{count} {n}");
+    }
+    public void Problem54()
+    {
+        // code-block...
+    }
+    private int getNewN(int n)
+    {
+        int sum = 0, orgN = n;
+        while (n != 0)
+        {
+            sum += n % 10;
+            n /= 10;
+        }
+        int newN = orgN % 10 * 10 + sum % 10;
+        return newN;
+    }
+    public void Problem53()
+    {
+        int n = int.Parse(Console.ReadLine()), count = 0;
+
+        for (int newN = 0, copyN = n; ; copyN = newN)
+        {
+            newN = getNewN(copyN);
+            count++;
+            if (n == newN)
+            {
+                System.Console.WriteLine(count);
+                break;
+            }
+        }
+    }
+    public void Problem52()
+    {
+        int n = int.Parse(Console.ReadLine()), sum = 0;
+        while (true)
+        {
+            sum = 0;
+            while (n != 0)
+            {
+                sum += n % 10;
+                n /= 10;
+            }
+            if (sum < 10)
+            {
+                System.Console.WriteLine($"{sum}");
+                break;
+            }
+            n = sum;
+        }
+    }
+    public void Problem51()
+    {
+        int n = int.Parse(Console.ReadLine()), count = 1;
+
+        for (int i = 1; i <= n; i++)
+        {
+            int space = n - i;
+            while (space-- > 0)
+            {
+                System.Console.Write(" ");
+            }
+            for (int j = 1; j <= i; j++)
+            {
+                System.Console.Write($"{count++ % 10} ");
+            }
+            System.Console.WriteLine();
+        }
+    }
+    public void Problem50()
     {
         int n = int.Parse(Console.ReadLine()), count = 0;
 
@@ -20,7 +236,7 @@ public static class Solutions
         }
         System.Console.WriteLine(count);
     }
-    public static void Problem49()
+    public void Problem49()
     {
         int n = int.Parse(Console.ReadLine());
 
@@ -53,7 +269,7 @@ public static class Solutions
             System.Console.WriteLine();
         }
     }
-    public static void Problem48()
+    public void Problem48()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
         int n = numbers[0], m = numbers[1];
@@ -79,7 +295,7 @@ public static class Solutions
         }
         System.Console.WriteLine(n);
     }
-    public static void Problem47()
+    public void Problem47()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
         int sum = 0;
@@ -94,7 +310,7 @@ public static class Solutions
         }
         System.Console.WriteLine($"{sum}");
     }
-    public static void Problem46()
+    public void Problem46()
     {
         long n = long.Parse(Console.ReadLine());
         for (long i = 1; i <= n; i++)
@@ -106,7 +322,7 @@ public static class Solutions
         }
         System.Console.WriteLine();
     }
-    public static void Problem45()
+    public void Problem45()
     {
         string str = Console.ReadLine();
 
@@ -116,7 +332,7 @@ public static class Solutions
         }
         System.Console.WriteLine();
     }
-    public static void Problem44()
+    public void Problem44()
     {
         long n = long.Parse(Console.ReadLine());
 
@@ -130,7 +346,7 @@ public static class Solutions
         }
         System.Console.WriteLine(f3);
     }
-    public static int Collatz(long n)
+    public int Collatz(long n)
     {
         int count = 0;
         while (n != 1)
@@ -147,7 +363,7 @@ public static class Solutions
         }
         return count;
     }
-    public static void Problem43()
+    public void Problem43()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(long.Parse).ToArray();
 
@@ -160,7 +376,7 @@ public static class Solutions
             System.Console.WriteLine($"{numbers[1]} {Collatz(numbers[1])}");
         }
     }
-    public static void Problem42()
+    public void Problem42()
     {
         long n = long.Parse(Console.ReadLine()), x = 0, y = 0;
 
@@ -178,7 +394,7 @@ public static class Solutions
         }
         System.Console.WriteLine($"{x} {y}");
     }
-    public static void Problem41()
+    public void Problem41()
     {
         long n = long.Parse(Console.ReadLine());
         for (long i = n; ; i++)
@@ -199,7 +415,7 @@ public static class Solutions
             }
         }
     }
-    public static void Problem40()
+    public void Problem40()
     {
         long n = long.Parse(Console.ReadLine());
 
@@ -224,7 +440,7 @@ public static class Solutions
         }
     }
 
-    public static void Problem39()
+    public void Problem39()
     {
         int n = int.Parse(Console.ReadLine()), sum = 0;
         var nums = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
@@ -236,7 +452,7 @@ public static class Solutions
         System.Console.WriteLine(sum);
     }
 
-    public static void Problem38()
+    public void Problem38()
     {
         var nums = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
         string res = new string("false");
@@ -257,7 +473,7 @@ public static class Solutions
         }
         System.Console.WriteLine(res);
     }
-    public static void Problem37()
+    public void Problem37()
     {
         int n = int.Parse(Console.ReadLine());
         int m = int.Parse(Console.ReadLine());
@@ -271,7 +487,7 @@ public static class Solutions
         }
 
     }
-    public static void Problem36()
+    public void Problem36()
     {
         var characters = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
 
@@ -284,7 +500,7 @@ public static class Solutions
             System.Console.WriteLine($"{int.Parse(characters[0]) - int.Parse(characters[2])}");
         }
     }
-    public static void Problem35()
+    public void Problem35()
     {
         int strike = 0, ball = 0;
         var a = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
@@ -316,7 +532,7 @@ public static class Solutions
         }
         System.Console.WriteLine($"{strike}S{ball}B");
     }
-    public static void Problem34()
+    public void Problem34()
     {
         char ch = char.Parse(Console.ReadLine());
 
@@ -333,7 +549,7 @@ public static class Solutions
             System.Console.WriteLine("none");
         }
     }
-    public static void Problem33()
+    public void Problem33()
     {
         int n = int.Parse(Console.ReadLine());
         int count = 0;
@@ -360,7 +576,7 @@ public static class Solutions
             count++;
         }
     }
-    public static void Problem32()
+    public void Problem32()
     {
         int year = int.Parse(Console.ReadLine());
 
@@ -373,7 +589,7 @@ public static class Solutions
             System.Console.WriteLine(0);
         }
     }
-    public static void Problem31()
+    public void Problem31()
     {
         int n = int.Parse(Console.ReadLine());
         if (n % 2 == 0 && n % 3 == 0 && n % 5 == 0)
@@ -401,7 +617,7 @@ public static class Solutions
             System.Console.WriteLine("N");
         }
     }
-    public static void Problem30()
+    public void Problem30()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n)).ToArray();
         int max = new int();
@@ -415,7 +631,7 @@ public static class Solutions
 
         System.Console.WriteLine(max);
     }
-    public static void Problem29()
+    public void Problem29()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n)).ToArray();
 
@@ -432,13 +648,13 @@ public static class Solutions
             System.Console.WriteLine("none");
         }
     }
-    public static void Problem28()
+    public void Problem28()
     {
         int n = int.Parse(Console.ReadLine());
 
         System.Console.WriteLine((n >= 0 && n < 40 ? "tashqarida o'yna" : "ichkarida o'yna"));
     }
-    public static void Problem27()
+    public void Problem27()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n)).ToArray();
 
@@ -450,13 +666,13 @@ public static class Solutions
 
         System.Console.WriteLine($"{res / 60} {res % 60}");
     }
-    public static void Problem26()
+    public void Problem26()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n)).ToArray();
 
         System.Console.WriteLine((numbers[0] > numbers[1] ? $"{numbers[0] / numbers[1]}\n{numbers[0] % numbers[1]}" : $"{numbers[1] / numbers[0]}\n{ numbers[1] % numbers[0] }"));
     }
-    public static void Problem25()
+    public void Problem25()
     {
         var numbers = Console.ReadLine().Split(' ', StringSplitOptions.RemoveEmptyEntries).Select(n => int.Parse(n)).ToArray();
 
@@ -469,24 +685,24 @@ public static class Solutions
             System.Console.WriteLine(numbers[1]);
         }
     }
-    public static void Problem24()
+    public void Problem24()
     {
         int n = int.Parse(Console.ReadLine());
 
         System.Console.WriteLine((n % 2 == 0 ? "even" : "odd"));
     }
-    public static void Problem23()
+    public void Problem23()
     {
         char ch = char.Parse(Console.ReadLine());
 
         System.Console.WriteLine(((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') ? 1 : 0));
     }
-    public static void Problem22()
+    public void Problem22()
     {
         int n = int.Parse(Console.ReadLine());
         System.Console.WriteLine((n >= 20 && n <= 30 ? 1 : 0));
     }
-    public static void Problem21()
+    public void Problem21()
     {
         double N = double.Parse(Console.ReadLine());
 
